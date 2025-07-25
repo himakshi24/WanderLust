@@ -1,25 +1,43 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-
+const Review = require("./review.js")
 const listingSchema = new Schema({
     title: {
         type: String,
+        required: true
     },
-    description: String,
-    image: {
-    type: Object,
-    default:
-        "https://images.unsplash.com/photo-1625505826533-5c80aca7d157?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdvYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
-    
-    set: (v) =>
-    v === ""
-        ? "https://images.unsplash.com/photo-1625505826533-5c80aca7d157?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGdvYXxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60"
-        : v,
+
+    description: {
+        type: String,
+        required: true
     },
     price: Number,
     location: String,
+    image:{
+    url:{
+        type: String,
+        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCG5Kb4ojjpylCIPM5rsX-AwRxhGStXkWCHwOf0hMji25EYtrBPKRbZa8&s",
+        set: (v)=> v===""? "https://www.adanirealty.com/-/media/project/realty/blogs/types-of-residential-properties.ashx":v
+        },
+    filename: String
+    },
     country: String,
-});
 
-const listing = mongoose.model("Listing", listingSchema);
-module.exports = listing;
+    reviews:[
+        {
+            type:Schema.Types.ObjectId,
+            ref : "review",
+        },
+    ],
+})
+
+// This is done so that when the listing is deleted the reviews related to the listing will also get deleted
+// Its a middle ware which enables when the findoneandupdate query calls
+listingSchema.post("findOneAndDelete",async(listing)=>{
+    if(listing){
+        await Review.deleteMany({_id: {$in : listing.reviews}})
+    }
+})
+
+const Listing = mongoose.model("Listing", listingSchema);
+module.exports = Listing;

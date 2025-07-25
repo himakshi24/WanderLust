@@ -1,0 +1,108 @@
+body{
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  
+}
+
+.container{
+  flex:1;
+}
+.add-btn{
+    background-color:#fe424d !important;
+    color: white !important;
+    border: none !important;
+}
+.navbar-nav{
+    color: black !important;
+}
+.navbar{
+    background-color: white;
+    height: 5rem;;
+}
+
+.fa-compass{
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+
+/* Footer */
+
+footer{
+    height: 6rem;
+    position: relative;
+}
+.f-info{
+    background-color: #ebebeb;
+
+    text-align: center;
+    height: 5rem;
+    align-items: space-evenly;
+    width: 100%;
+}
+.f-info-links a{
+    text-decoration: none;
+    color: black;
+
+}
+.f-info-links:hover{
+    text-decoration: underline;
+}
+.f-info-social{
+    word-spacing: 5px;
+}
+
+/* Cards */
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+.card-img-top{
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover;
+    height: 20rem;
+}
+.card-body{
+    padding: 0% !important;
+}
+.listings-link{
+    text-decoration: none !important;
+    color: black;
+}
+/* card-overlay */
+.card-img-overlay{
+    opacity: 0;
+}
+.card-img-overlay:hover{
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* card show */
+
+.card-img-show{
+    height: 30vh;
+    margin-right: 100px;
+}
+
+
+.atag a{
+ text-decoration: none;
+ color: black;
+ border: black solid 2px;
+ border-radius: 3px;
+ font-size: large;
+ background-color: #6c6f6d  ;
+ color: white;
+}
+.delete-btn{
+    background-color: #fe424d;
+    color: white;
+}
+
+/* Review-card */
+.review-card{
+    border: black 2rem;
+
+}
