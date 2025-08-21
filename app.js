@@ -1,3 +1,9 @@
+if(process.env.NODE_ENV != "producation"){
+    require('dotenv').config();
+}
+
+// console.log(process.env.SECRET);
+
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -11,9 +17,11 @@ const passport = require("passport"); //passport is an authentication middleware
 const LocalStrategy = require("passport-local"); //local strategy for passport
 const User = require("./models/user.js"); //user model for authentication
 
+
 const listingRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/reviews.js");
 const userRouter = require("./routes/user.js");
+
 
 async function main(){
     await mongoose.connect("mongodb://127.0.0.1:27017/wanderlust")
@@ -57,9 +65,9 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req,res,next)=>{
     res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    res.locals.currUser = req.user;
     next();
 });
-
 // app.get("/demouser",async (req,res)=>{
 //     let fakeuser = new User({
 //         email: "himakshimanmode24@gmail.com",
@@ -71,7 +79,7 @@ app.use((req,res,next)=>{
 // });
 
 app.use("/listings",listingRouter); //accessing all the routes from the "listing.js"
-app.use("/listings/:id/reviews",reviewsRouter); //accessing all the routes from the "reviews.js"
+app.use('/listings/:id/reviews',reviewsRouter); //accessing all the routes from the "reviews.js"
 app.use("/",userRouter);
 
 app.all(/.*/,(req,res,next)=>{
@@ -86,4 +94,5 @@ app.use((err,req,res,next)=>{
 app.listen(8080, ()=>{
     console.log("Server in running properly");
 })
+
 

@@ -25,11 +25,15 @@ const listingSchema = new Schema({
 
     reviews:[
         {
-            type:Schema.Types.ObjectId,
-            ref : "review",
-        },
+            type: Schema.Types.ObjectId,
+            ref : "Review"
+        }
     ],
-})
+    owner: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
+});
 
 // This is done so that when the listing is deleted the reviews related to the listing will also get deleted
 // Its a middle ware which enables when the findoneandupdate query calls
@@ -37,7 +41,7 @@ listingSchema.post("findOneAndDelete",async(listing)=>{
     if(listing){
         await Review.deleteMany({_id: {$in : listing.reviews}})
     }
-})
+});
 
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;

@@ -61,7 +61,7 @@ footer{
     border-radius: 1rem !important;
     width: 100% !important;
     object-fit: cover;
-    height: 20rem;
+    height: 20rem !important;
 }
 .card-body{
     padding: 0% !important;
@@ -82,10 +82,13 @@ footer{
 /* card show */
 
 .card-img-show{
-    height: 30vh;
+    height: 20rem !important;
     margin-right: 100px;
 }
 
+.atag{
+    display: inline-flex !important;
+}
 
 .atag a{
  text-decoration: none;
