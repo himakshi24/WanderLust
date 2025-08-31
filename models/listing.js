@@ -14,12 +14,13 @@ const listingSchema = new Schema({
     price: Number,
     location: String,
     image:{
-    url:{
-        type: String,
-        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCG5Kb4ojjpylCIPM5rsX-AwRxhGStXkWCHwOf0hMji25EYtrBPKRbZa8&s",
-        set: (v)=> v===""? "https://www.adanirealty.com/-/media/project/realty/blogs/types-of-residential-properties.ashx":v
-        },
-    filename: String
+    url: String,
+    // url:{
+    //     type: String,
+    //     default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCG5Kb4ojjpylCIPM5rsX-AwRxhGStXkWCHwOf0hMji25EYtrBPKRbZa8&s",
+    //     set: (v)=> v===""? "https://www.adanirealty.com/-/media/project/realty/blogs/types-of-residential-properties.ashx":v
+    //     },
+    filename: String,
     },
     country: String,
 

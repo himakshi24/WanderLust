@@ -4,7 +4,6 @@ const wrapAsync = require("../utils/wrapAsync.js")
 const Expresserror = require("../utils/Expresserror.js")// const {listingSchema , reviewSchema} = require("../schema.js")
 const Listing = require("../models/listing.js") //indicztion error not a problem
 const {isLoggedIn ,isOwner , validateListing} = require("../middleware.js");
-
 // const validatelisting = (req,res,next)=>{
 //     let{error}= listingSchema.validate(req.body);
 //     if (error){
@@ -17,7 +16,8 @@ const {isLoggedIn ,isOwner , validateListing} = require("../middleware.js");
 
 const listingController = require("../controllers/listing.js");
 const multer = require("multer");
-const upload = multer({ dest: 'uploads/'});
+const {storage} = require("../CloudConfig.js");
+const upload = multer({storage});
 // new Route
 router.get("/new",isLoggedIn, listingController.renderNewForm);
 
@@ -26,10 +26,12 @@ router.get("/new",isLoggedIn, listingController.renderNewForm);
 router
     .route("/")
     .get(wrapAsync(listingController.index))
-    // .post(isLoggedIn, wrapAsync(listingController.createListing));
-    .post( upload.single('listing[image]'),(req, res) => {
-       res.send(req.file);
-    });
+    .post(
+        isLoggedIn, 
+        upload.single('listing[image]'),
+        wrapAsync(listingController.createListing),
+        validateListing,
+    );
 // Update route
 //show
 // delete

@@ -29,8 +29,12 @@ res.render("./listings/show.ejs",{listing})
 
 
 module.exports.createListing = async (req,res,next)=>{
+    let url = req.file.path;
+    let filename = req.file.filename;
+    
     const newlisting = new Listing(req.body.listing);
     newlisting.owner = req.user._id;
+    newlisting.image = {url, filename};
     await newlisting.save();
     req.flash("success","New Listing Created Successfully");
     res.redirect("/listings");

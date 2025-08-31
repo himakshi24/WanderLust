@@ -46,9 +46,9 @@ const sessionoptions = {
     saveUninitialized: true}
 
 
-app.get("/",(req,res)=>{
-    res.send("Hello Everyone")
-})
+// app.get("/",(req,res)=>{
+//     res.send("Hello Everyone")
+// })
 
 
 app.use(session(sessionoptions)); //using the session middleware with the options defined above

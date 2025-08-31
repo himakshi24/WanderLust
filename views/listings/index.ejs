@@ -1,12 +1,78 @@
 <% layout("/layout/boilerplate")-%>
 <body>
-    <h3>All Listings</h3>
+    <!-- <h3>All Listings</h3> -->
     <!-- <form method="get" action="./listings/new" >
     <button>Creat a new Post</button>
 </form> -->
 
+<style>
+    #filters {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .filter {
+        margin-top: 1rem;
+        margin-right: 1rem;
+        text-align: center;
+        opacity: 0.7;
+    }
+    .filter:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
 
-<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 ">
+    .filter p{
+        font-size: 0.8rem;
+    }
+
+</style>
+
+<div id="filters">
+    <div class = "filter">
+        <div><i class="fa-solid fa-fire"></i></div> 
+        <p>Trending</p>
+    </div>
+    <div class = "filter">
+        <div><i class="fa-solid fa-bed"></i></div> 
+        <p>Rooms</p>
+    </div>
+    <div class = "filter">
+        <div><i class="fa-solid fa-mountain-city"></i></div> 
+        <p>Iconic Cities</p>
+    </div>
+    <div class = "filter">
+        <div><i class="fa-solid fa-mountain"></i></div> 
+        <p>Mountains</p>
+    </div>
+    <div class = "filter">
+        <div><i class="fa-solid fa-chess-rook"></i></div> 
+        <p>Castles</p>
+    </div>
+    <div class = "filter">
+    <div><i class="fa-solid fa-person-swimming"></i></div> 
+        <p>Amazing Pools</p>
+    </div>
+    <div class = "filter">
+    <div><i class="fa-solid fa-tent"></i></div> 
+        <p>Camping</p>
+    </div>
+    <div class = "filter">
+    <div><i class="fa-solid fa-tractor"></i></div> 
+        <p>Farms</p>
+    </div>
+    <div class = "filter">
+    <div><i class="fa-solid fa-snowman"></i></div> 
+        <p>Arctic</p>
+    </div>
+    <div class= "tax-toggle">
+    <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" id="switchCheckDefault">
+        <label class="form-check-label" for="switchCheckDefault">Display Total after Taxes</label>
+    </div>
+    </div>
+</div>
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
     <%for(let listing of allListings){ %> 
     <a href="/listings/<%=listing._id%>" class="listings-link">
         <div class="card cols" style="width: 20rem;">
